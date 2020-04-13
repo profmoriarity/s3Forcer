@@ -10,8 +10,10 @@ parser = argparse.ArgumentParser(description="S3 Bucket Brute force with threadi
 parser.add_argument("company_name", help="Specify Company name")
 parser.add_argument('-t', action='store', dest='threads',help='Specify threads')
 parser.add_argument('-w', action='store', dest='wordlist',help='Specify wordlist')
+parser.add_argument('-o', action='store', dest='outf',help='Specify output file')
 args = parser.parse_args()
 
+fi = open(args.outf,'a')
 print("Started S3 Brute Force...")
 def checkBucket(word):
 	print(f'\rScanning bucket: {word}', end='', flush=True)
@@ -19,7 +21,7 @@ def checkBucket(word):
 		ss = "https://"+word+".s3.amazonaws.com/"
 		responseXml = requests.get(ss,verify=False).text
 		if 'ListBucketResult ' in responseXml:
-			print(word)
+			fi.write(ss)
 	except:
 		pass
 
