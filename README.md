@@ -18,3 +18,10 @@ optional arguments:
   -p POSITION   Word Position
 
 ```
+
+
+## Example
+
+```
+python3 s3forcer.py acme -t 50 -w list.txt -o out.txt -p 1 
+```
