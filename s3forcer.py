@@ -11,10 +11,13 @@ parser.add_argument("company_name", help="Specify Company name")
 parser.add_argument('-t', action='store', dest='threads',help='Specify threads')
 parser.add_argument('-w', action='store', dest='wordlist',help='Specify wordlist')
 parser.add_argument('-o', action='store', dest='outf',help='Specify output file')
+
+parser.add_argument('-p', action='store', dest='position',help='Word Position')
 args = parser.parse_args()
 
 fi = open(args.outf,'a')
 print("Started S3 Brute Force...")
+
 def checkBucket(word):
 	print(f'\rScanning bucket: {word}', end='', flush=True)
 	try:
@@ -42,12 +45,13 @@ for x in range(threads):
     t.daemon = True
     t.start()
 
-
+position = args.position
 company = args.company_name.strip()
 for s in seps:
-    with open(args.wordlist.strip()) as f:
-        for bucket in f.readlines():
-            q.put(company+s+bucket.strip())
-
-
+	with open(args.wordlist.strip()) as f:
+		for bucket in f.readlines():
+			if int(position)==1:
+				q.put(company+s+bucket.strip())
+			else:
+				q.put(s+bucket.strip()+company)
 q.join()
