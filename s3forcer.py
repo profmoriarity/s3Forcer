@@ -2,6 +2,7 @@ import requests
 import threading
 from queue import Queue
 import argparse
+import sys
 requests.packages.urllib3.disable_warnings() 
 
 
@@ -11,14 +12,16 @@ parser.add_argument('-t', action='store', dest='threads',help='Specify threads')
 parser.add_argument('-w', action='store', dest='wordlist',help='Specify wordlist')
 args = parser.parse_args()
 
+print("Started S3 Brute Force...")
 def checkBucket(word):
-    sys.stdout.write("\rScanning For Bucket: {0}".format(word))
-    sys.stdout.flush()
-    ss = "https://"+word+".s3.amazonaws.com/"
-    responseXml = requests.get(ss,verify=False).text
-    if 'ListBucketResult ' in responseXml:
-        print(word)
-    
+	print(f'\rScanning bucket: {word}', end='', flush=True)
+	try:
+		ss = "https://"+word+".s3.amazonaws.com/"
+		responseXml = requests.get(ss,verify=False).text
+		if 'ListBucketResult ' in responseXml:
+			print(word)
+	except:
+		pass
 
 seps = ["", "-", ".","_"] 
 
