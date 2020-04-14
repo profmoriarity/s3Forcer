@@ -1,7 +1,7 @@
 # s3basher.sh
 User parallel for concurrency
 ```
-parallel -j 100 "bash s3basher.sh {} paytm" :::: ./wordlist.txt
+parallel -j 100 "bash s3basher.sh {} companyname" :::: ./wordlist.txt
 ```
 
 # s3Forcer
