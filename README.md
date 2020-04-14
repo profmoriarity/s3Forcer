@@ -1,3 +1,9 @@
+# s3basher.sh
+User parallel for concurrency
+```
+parallel -j 100 "bash s3basher.sh {} companyname" :::: ./wordlist.txt
+```
+
 # s3Forcer
 Multi-threaded S3 Bucket  brute forcer
 
