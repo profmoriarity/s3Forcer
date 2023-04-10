@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import requests
 import threading
 from queue import Queue
