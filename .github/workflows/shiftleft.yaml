@@ -1,0 +1,16 @@
+name: Security Scan
+
+on: [push, pull_request]
+
+jobs:
+  security_scan:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Perform Scan
+      uses: ShiftLeftSecurity/scan-action@master
+      with:
+        type: "credscan,java,depscan"
